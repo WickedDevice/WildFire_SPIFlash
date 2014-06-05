@@ -16,24 +16,21 @@
 // - [0-9] writes a random byte to addresses [0-9] (either 0xAA or 0xBB)
 // Get the SPIFlash library from here: https://github.com/LowPowerLab/SPIFlash
 
-#include <SPIFlash.h>
-#include <RFM12B.h>
+#include <WildFire_SPIFlash.h>
 #include <SPI.h>
 #include <avr/wdt.h>
+#include <WildFire.h>
+WildFire wf;
 
 #define SERIAL_BAUD      115200
 char input = 0;
 long lastPeriod = -1;
 
-//////////////////////////////////////////
-// flash(SPI_CS, MANUFACTURER_ID)
-// SPI_CS          - CS pin attached to SPI flash chip (8 in case of Moteino)
-// MANUFACTURER_ID - OPTIONAL, 0x1F44 for adesto(ex atmel) 4mbit flash
-//                             0xEF30 for windbond 4mbit flash
-//////////////////////////////////////////
-SPIFlash flash(8, 0xEF30);
+WildFire_SPIFlash flash;
 
 void setup(){
+  wf.begin();
+  
   Serial.begin(SERIAL_BAUD);
   Serial.print("Start...");
 

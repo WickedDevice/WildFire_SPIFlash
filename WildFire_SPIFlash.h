@@ -10,6 +10,9 @@
  * it under the terms of either the GNU General Public License version 2
  * or the GNU Lesser General Public License version 2.1, both as
  * published by the Free Software Foundation.
+ *
+ * Modified by Victor Aprea / Wicked Device for ease of use with WildFire
+ *
  */
 
 #ifndef _SPIFLASH_H_
@@ -67,10 +70,10 @@
                                               // Example for Winbond 4Mbit W25X40CL: 0xEF30 (page 14: http://www.winbond.com/NR/rdonlyres/6E25084C-0BFE-4B25-903D-AE10221A0929/0/W25X40CL.pdf)
 #define SPIFLASH_MACREAD          0x4B        // read unique ID number (MAC)
                                               
-class SPIFlash {
+class WildFire_SPIFlash {
 public:
-  static byte UNIQUEID[8];
-  SPIFlash(byte slaveSelectPin, uint16_t jedecID=0);
+  static byte UNIQUEID[8];  
+  WildFire_SPIFlash(byte slaveSelectPin=15, uint16_t jedecID=0xEF30); // default for WildFire v3
   boolean initialize();
   void command(byte cmd, boolean isWrite=false);
   byte readStatus();
