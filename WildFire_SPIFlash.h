@@ -36,19 +36,19 @@
 /// Assuming the WP pin is pulled up (to disable hardware write protection)
 /// To use any write commands the WEL bit in the status register must be set to 1.
 /// This is accomplished by sending a 0x06 command before any such write/erase command.
-/// The WEL bit in the status register resets to the logical “0” state after a
-/// device power-up or reset. In addition, the WEL bit will be reset to the logical “0” state automatically under the following conditions:
-/// • Write Disable operation completes successfully
-/// • Write Status Register operation completes successfully or aborts
-/// • Protect Sector operation completes successfully or aborts
-/// • Unprotect Sector operation completes successfully or aborts
-/// • Byte/Page Program operation completes successfully or aborts
-/// • Sequential Program Mode reaches highest unprotected memory location
-/// • Sequential Program Mode reaches the end of the memory array
-/// • Sequential Program Mode aborts
-/// • Block Erase operation completes successfully or aborts
-/// • Chip Erase operation completes successfully or aborts
-/// • Hold condition aborts
+/// The WEL bit in the status register resets to the logical Â“0Â” state after a
+/// device power-up or reset. In addition, the WEL bit will be reset to the logical Â“0Â” state automatically under the following conditions:
+/// Â• Write Disable operation completes successfully
+/// Â• Write Status Register operation completes successfully or aborts
+/// Â• Protect Sector operation completes successfully or aborts
+/// Â• Unprotect Sector operation completes successfully or aborts
+/// Â• Byte/Page Program operation completes successfully or aborts
+/// Â• Sequential Program Mode reaches highest unprotected memory location
+/// Â• Sequential Program Mode reaches the end of the memory array
+/// Â• Sequential Program Mode aborts
+/// Â• Block Erase operation completes successfully or aborts
+/// Â• Chip Erase operation completes successfully or aborts
+/// Â• Hold condition aborts
 #define SPIFLASH_WRITEENABLE      0x06        // write enable
 #define SPIFLASH_WRITEDISABLE     0x04        // write disable
 
