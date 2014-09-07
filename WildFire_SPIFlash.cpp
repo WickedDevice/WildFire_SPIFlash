@@ -66,7 +66,8 @@ boolean WildFire_SPIFlash::initialize()
   SPI.setClockDivider(SPI_CLOCK_DIV2); //max speed, except on Due which can run at system clock speed
 #endif
   SPI.begin();
-
+  wakeup();
+  
   if (_jedecID == 0 || readDeviceId() == _jedecID) {
     command(SPIFLASH_STATUSWRITE, true); // Write Status Register
     SPI.transfer(0);                     // Global Unprotect

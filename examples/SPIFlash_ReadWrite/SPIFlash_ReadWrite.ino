@@ -18,7 +18,6 @@
 
 #include <WildFire_SPIFlash.h>
 #include <SPI.h>
-#include <avr/wdt.h>
 #include <WildFire.h>
 WildFire wf;
 
