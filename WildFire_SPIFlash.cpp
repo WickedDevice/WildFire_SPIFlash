@@ -67,7 +67,7 @@ boolean WildFire_SPIFlash::initialize()
 #endif
   SPI.begin();
   wakeup();
-  
+
   if (_jedecID == 0 || readDeviceId() == _jedecID) {
     command(SPIFLASH_STATUSWRITE, true); // Write Status Register
     SPI.transfer(0);                     // Global Unprotect
@@ -244,4 +244,28 @@ void WildFire_SPIFlash::wakeup() {
 /// cleanup
 void WildFire_SPIFlash::end() {
   SPI.end();
+}
+
+
+// support for Stream
+void WildFire_SPIFlash::begin() {
+  this->initialize();
+}
+
+void WildFire_SPIFlash::seek(uint32_t address) {
+  this->address = address;
+}
+
+size_t WildFire_SPIFlash::write(uint8_t data) {
+  this->writeByte(this->address, data);
+  this->address++;
+
+  return 1;
+}
+
+int WildFire_SPIFlash::read() {
+  uint8_t data = this->readByte(this->address);
+  this->address++;
+
+  return data;
 }

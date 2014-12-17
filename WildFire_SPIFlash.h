@@ -69,10 +69,24 @@
                                               // Example for Atmel-Adesto 4Mbit AT25DF041A: 0x1F44 (page 27: http://www.adestotech.com/sites/default/files/datasheets/doc3668.pdf)
                                               // Example for Winbond 4Mbit W25X40CL: 0xEF30 (page 14: http://www.winbond.com/NR/rdonlyres/6E25084C-0BFE-4B25-903D-AE10221A0929/0/W25X40CL.pdf)
 #define SPIFLASH_MACREAD          0x4B        // read unique ID number (MAC)
-                                              
-class WildFire_SPIFlash {
+
+class WildFire_SPIFlash : public Stream {
 public:
-  static byte UNIQUEID[8];  
+  void begin();
+  void seek(uint32_t);
+
+  uint32_t address;
+
+  // Print::write
+  size_t write(uint8_t);
+
+  // Stream
+  int read();
+  int available() { return -1; }
+  void flush() {}
+  int peek() { return -1; }
+
+  static byte UNIQUEID[8];
   WildFire_SPIFlash(byte slaveSelectPin=15, uint16_t jedecID=0xEF30); // default for WildFire v3
   boolean initialize();
   void command(byte cmd, boolean isWrite=false);
@@ -87,15 +101,18 @@ public:
   void blockErase32K(long address);
   word readDeviceId();
   byte* readUniqueId();
-  
+
   void sleep();
   void wakeup();
   void end();
+
 protected:
   void select();
   void unselect();
   byte _slaveSelectPin;
   uint16_t _jedecID;
+
+using Print::write;
 };
 
 #endif
